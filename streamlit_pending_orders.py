@@ -14,7 +14,7 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.orders").filter(col("ORDER_FILLED")==0).collect()
-st.write(my_dataframe[0])
+#st.write(my_dataframe[0])
 if my_dataframe:
     editable_df = st.data_editor(my_dataframe)
     submitted = st.button('Submit')
