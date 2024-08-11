@@ -1,7 +1,7 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col, when_matched
-
+import pandas as pd
 
 # Write directly to the app
 st.title(":cup_with_straw: Pending Smoothie Orders:cup_with_straw:")
@@ -14,6 +14,7 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.orders").filter(col("ORDER_FILLED")==0).collect()
+st.write(type(my_dataframe["ORDER_TS"]))
 if my_dataframe:
     editable_df = st.data_editor(my_dataframe)
     submitted = st.button('Submit')
